@@ -24,31 +24,18 @@ class Solution {
         {
             right[i]=arr[mid+1+i];
         }
-        // int ptr=0;
-        // for(int i=0;i<n;i++)
-        // {
-        //     while(ptr<m && left[i]>2*right[ptr])
-        //     {
-        //         ptr++;
-        //     }
-        //     output+=ptr;
-        // }
-        int ptr = mid + 1;
-        // int cnt = 0;
-        for (int i = low; i <= mid; i++) {
-            while (ptr <= high && (long)arr[i] > (long)2 * arr[ptr])
+        int ptr=0;
+        for(int i=0;i<n;i++)
+        {
+            while(ptr<m && (long)left[i]>(long)2*right[ptr])
             {
-                // System.out.println(arr[ptr]==arr[i]);
                 ptr++;
             }
-            // System.out.println(ptr+" "+(mid+1));
-            output += (ptr - (mid + 1));
+            output+=ptr;
         }
-        // return cnt;
         int k=low,i=0,j=0;
         while(i<n && j<m)
         {
-            // System.out.println(left[i]+"- "+right[j]+"- "+k);
             if(left[i]<=right[j])
             {
                 arr[k]=left[i];
@@ -56,8 +43,6 @@ class Solution {
             }
             else
             {
-                // System.out.println(left[i]+" "+right[j]+" "+k+" "+n+" "+i);
-                
                 arr[k]=right[j];
                 j++;
             } 
@@ -79,10 +64,6 @@ class Solution {
     public int reversePairs(int[] nums) {
         output=0;
         mergesort(nums,0,nums.length-1);
-        for(int x:nums)
-        {
-            // System.out.print(x+" ");
-        }
         return output;
     }
 }

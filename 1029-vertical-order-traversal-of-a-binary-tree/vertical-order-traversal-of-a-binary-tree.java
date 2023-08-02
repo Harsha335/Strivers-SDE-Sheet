@@ -35,7 +35,7 @@ class Solution {
                     PriorityQueue<Integer> xx=map.get(key).get(x);
                     while(!xx.isEmpty())
                         level.add(xx.poll());
-                    map.get(key).get(x).poll();
+                    // map.get(key).get(x).poll();
                 // }
             }
             output.add(level);

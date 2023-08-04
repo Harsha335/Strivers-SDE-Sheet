@@ -26,7 +26,7 @@ class Solution {
         // return helper(s,0,0,wordDict);
 
         int n=s.length();
-        List<Integer> isTrues=new ArrayList<>();
+        HashSet<Integer> isTrues=new HashSet<>();
         isTrues.add(0); //index+1 ("" is true)
         for(int i=0;i<n;i++)
         {

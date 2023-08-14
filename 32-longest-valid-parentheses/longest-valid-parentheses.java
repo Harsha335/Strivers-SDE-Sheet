@@ -8,16 +8,13 @@ class Solution {
     //     }
     // }
     public boolean isNumeric(String strNum) {
-    if (strNum == null) {
-        return false;
+        try {
+            double d = Double.parseDouble(strNum);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
     }
-    try {
-        double d = Double.parseDouble(strNum);
-    } catch (NumberFormatException nfe) {
-        return false;
-    }
-    return true;
-}
     public int longestValidParentheses(String s) {
         int n=s.length();
         int maxi=0;
@@ -35,6 +32,10 @@ class Solution {
                 if(!stack.isEmpty() && stack.peek()=="(")
                 {
                     stack.pop();
+                    while(!stack.isEmpty() && isNumeric(stack.peek()))
+                    {
+                        cur+=Integer.parseInt(stack.pop());
+                    }
                     maxi=Math.max(maxi,cur+2);
                     stack.push((cur+2)+"");
                 }
@@ -48,16 +49,16 @@ class Solution {
             else
                 stack.push("(");
         }
-        // int cur=0;
-        // System.out.println(stack);
-        while(!stack.isEmpty())
-        {
-            if(stack.peek()==")" || stack.peek()=="(") stack.pop();
-            int cur=0;
-            while(!stack.isEmpty() && isNumeric(stack.peek()))
-                cur+=Integer.parseInt(stack.pop());
-            maxi=Math.max(cur,maxi);
-        }
+        // // int cur=0;
+        // // System.out.println(stack);
+        // while(!stack.isEmpty())
+        // {
+        //     if(stack.peek()==")" || stack.peek()=="(") stack.pop();
+        //     int cur=0;
+        //     while(!stack.isEmpty() && isNumeric(stack.peek()))
+        //         cur+=Integer.parseInt(stack.pop());
+        //     maxi=Math.max(cur,maxi);
+        // }
         return maxi;
     }
 }

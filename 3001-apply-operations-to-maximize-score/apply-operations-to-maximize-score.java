@@ -89,14 +89,19 @@ class Solution {
    int mod = (int) 1e9 + 7;
 
 public int calculatePower(int base, int exponent) {
-    int result = 1;
-    while (exponent > 0) {
-        if (exponent % 2 == 1) {
-            result = (int) (((long) result * base)%mod);
-        }
-        base = (int) (((long) base * base) % mod);
-        exponent /= 2;
+//     int result = 1;
+//     while (exponent > 0) {
+//         if (exponent % 2 == 1) {
+//             result = (int) (((long) result * base)%mod);
+//         }
+//         base = (int) (((long) base * base) % mod);
+//         exponent /= 2;
+//     }
+//     return result;
+// }
+    if(exponent==1) return base;
+    int value=calculatePower(base,exponent/2);
+    return (int)((1L*((1L*value*value)%mod)*(exponent%2==0?1:base))%mod);
+    // return (int) ((1L * ((1L * value * value) % mod) * (exponent % 2 == 1 ? base : 1)) % mod);
     }
-    return result;
-}
 }

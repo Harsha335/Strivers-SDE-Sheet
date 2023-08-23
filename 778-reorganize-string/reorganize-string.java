@@ -9,7 +9,7 @@ class Solution {
         {
             if(sb.charAt(i)==sb.charAt(i+1))
             {
-                j=i+2;
+                j=Math.max(i+2,j+1);
                 while(j<n)
                 {
                     if(sb.charAt(j)!=sb.charAt(i) && (j==n-1 || sb.charAt(j-1)!=sb.charAt(j+1)))
@@ -31,7 +31,7 @@ class Solution {
             if(sb.charAt(i)==sb.charAt(i-1))
             {
                 // System.out.println(i);
-                j=i-2;
+                j=Math.min(i-2,j);
                 while(j>=0)
                 {
                     if(sb.charAt(j)!=sb.charAt(i) && (j==0 || sb.charAt(j-1)!=sb.charAt(j+1)))

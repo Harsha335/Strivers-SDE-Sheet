@@ -6,11 +6,12 @@ class Solution {
         int ans=0;
         while(i<=j)
         {
-            // System.out.println(i+" "+j);
             int mid=i+(j-i)/2;
-            if(Math.abs(arr[ans]-x)>Math.abs(arr[mid]-x))
+            int pre=Math.abs(arr[ans]-x);
+            int curr=Math.abs(arr[mid]-x);
+            if(pre>curr)
                 ans=mid;
-            else if(Math.abs(arr[ans]-x)==Math.abs(arr[mid]-x))
+            else if(pre==curr)
                 ans=Math.min(ans,mid);
             if(arr[mid]>x)
             {
@@ -29,23 +30,25 @@ class Solution {
         int i=ind-1;
         int j=ind+1;
         List<Integer> output=new ArrayList<>();
-        output.add(arr[ind]);
+        // output.add(arr[ind]);
         k-=1;
         while(k-->0)
         {
             int left=(i==-1?(int)1e9:arr[i]);
             int right=(j==n?(int)1e9:arr[j]);
-            // System.out.println(i+" "+j+" "+k);
-            // System.out.println(output);
             if(Math.abs(left-x)<=Math.abs(right-x))
             {
-                output.add(0,arr[i]);
+                // output.add(0,arr[i]);
                 i--;
             }
             else{
-                output.add(arr[j]);
+                // output.add(arr[j]);
                 j++;
             }
+        }
+        for(int kk=i+1;kk<j;kk++)
+        {
+            output.add(arr[kk]);
         }
         return output;
     }

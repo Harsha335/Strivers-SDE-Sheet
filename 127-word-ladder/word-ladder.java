@@ -1,5 +1,5 @@
 class Solution {
-    boolean visited[];
+    // boolean visited[];
     // HashMap<Character,Integer> counter[];
     int n;
     int len;
@@ -15,18 +15,18 @@ class Solution {
     //     }
     //     return count==1;
     // }
-    boolean isEqual(String s1,String s2)
-    {
-        int count=0;
+    // boolean isEqual(String s1,String s2)
+    // {
+    //     int count=0;
         
-        // System.out.println(s1+" "+s2);
-        for(int i=0;i<len;i++)
-        {
-            if(s1.charAt(i)!=s2.charAt(i))
-                count++;
-        }
-        return count==1;
-    }
+    //     // System.out.println(s1+" "+s2);
+    //     for(int i=0;i<len;i++)
+    //     {
+    //         if(s1.charAt(i)!=s2.charAt(i))
+    //             count++;
+    //     }
+    //     return count==1;
+    // }
     // int dp[];
     // int helper(String s,int ind,String end,List<String> wordList)
     // {
@@ -50,7 +50,7 @@ class Solution {
     // }
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
         n=wordList.size();
-        visited=new boolean[n];
+        // visited=new boolean[n];
         len=beginWord.length();
         // dp=new int[n];
         // Arrays.fill(dp,-1);
@@ -92,23 +92,49 @@ class Solution {
         // return (ans==(int)1e9)?0:ans;
         q.add(beginWord);
         int level=1;
+        HashSet<String> words=new HashSet<>(wordList);
+        // System.out.println(words);
+
         while(!q.isEmpty())
         {
             int size=q.size();
             while(size-->0)
             {
                 String ss=q.poll();
-                for(int i=0;i<n;i++)
+                //FIND NEIBOURS BY REPLACING EVERY CHAR
+                // for(int i=0;i<n;i++)
+                // {
+                //     if(!visited[i] && isEqual(wordList.get(i),ss))
+                //     {
+                //         if(wordList.get(i).equals(endWord))
+                //             return level+1;
+                //         q.add(wordList.get(i));
+                //         visited[i]=true;
+                //     }
+                // }
+                char[] ch=ss.toCharArray();
+                // System.out.println(ss);
+                for(int i=0;i<len;i++)
                 {
-                    if(!visited[i] && isEqual(wordList.get(i),ss))
+                    char original=ch[i];
+                    for(char c='a';c<='z';c++)
                     {
-                        if(wordList.get(i).equals(endWord))
-                            return level+1;
-                        q.add(wordList.get(i));
-                        visited[i]=true;
+                        if(c!=original)
+                        {
+                            ch[i]=c;
+                            String newString=new String(ch);
+                            // System.out.println(newString);
+                            if(words.contains(newString))
+                            {
+                                if(newString.equals(endWord))
+                                    return level+1;
+                                q.add(newString);
+                                words.remove(newString);
+                            }
+                        }
                     }
+                    ch[i]=original;
                 }
-
             }
             level++;
         }

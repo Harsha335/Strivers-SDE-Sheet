@@ -6,10 +6,10 @@ class Solution {
     {
         return ((rowSet[i]&(1<<ele))==0 && (colSet[j]&(1<<ele))==0 && (square[i/3][j/3]&(1<<ele))==0);
     }
-    boolean helper(char[][] board)
+    boolean helper(char[][] board,int ii)
     {
         // System.out.println(ii+" "+jj);
-        for(int i=0;i<9;i++)
+        for(int i=ii;i<9;i++)
         {
             for(int j=0;j<9;j++)
             {
@@ -24,7 +24,7 @@ class Solution {
                             rowSet[i]=(rowSet[i]^(1<<ele));
                             colSet[j]=(colSet[j]^(1<<ele));
                             square[i/3][j/3]^=(1<<ele);
-                            if(helper(board))
+                            if(helper(board,i))
                                 return true;
                             rowSet[i]=(rowSet[i]^(1<<ele));
                             colSet[j]=(colSet[j]^(1<<ele));
@@ -55,6 +55,6 @@ class Solution {
                 }
             }
         }
-        helper(board);
+        helper(board,0);
     }
 }

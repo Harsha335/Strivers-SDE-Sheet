@@ -3,16 +3,13 @@ class Solution {
     List<String> result;
 
     private void dfs(String airport) {
-        // System.out.println(map);
         PriorityQueue<String> destinations = map.get(airport);
         while (destinations != null && !destinations.isEmpty()) {
             String nextAirport = destinations.poll();
             dfs(nextAirport);
         }
         result.add(0, airport); // Add the airport to the beginning of the result list.
-        // System.out.println(result);
     }
-
     public List<String> findItinerary(List<List<String>> tickets) {
         map = new HashMap<>();
         result = new ArrayList<>();
@@ -32,7 +29,7 @@ class Solution {
 
 
 // class Solution {
-//     HashMap<String,PriorityQueue<String>> map;
+//     HashMap<String,List<String>> map;
 //     HashMap<String,Integer> visited;
 //     List<String> helper(String curr,int count,List<String> list)
 //     {
@@ -63,15 +60,19 @@ class Solution {
 //         visited=new HashMap<>();
 //         for(List<String> x :tickets)
 //         {
-//             map.putIfAbsent(x.get(0),new PriorityQueue<>());
+//             map.putIfAbsent(x.get(0),new ArrayList<String>());
 //             map.get(x.get(0)).add(x.get(1));
 //             visited.putIfAbsent(x.get(0),0);
+//             // this.visitBitmap.put(x.get(0), new boolean[map.get(x.get(0)).size()]);
 //         }
-//         List<String> output=new ArrayList<String>();
+//         for(String x:map.keySet())
+//         {
+//             Collections.sort(map.get(x));
+//         }
 //         // System.out.println(map);
+//         List<String> output=new ArrayList<String>();
 //         output.add("JFK");
-//         return helper("JFK",tickets.size(),output);
-        
+//         return helper("JFK",tickets.size(),output);       
 //     }
 // }
 
@@ -105,13 +106,13 @@ class Solution {
 //       this.visitBitmap.put(entry.getKey(), new boolean[entry.getValue().size()]);
 //     }
 
-//     this.flights = tickets.size();
-//     LinkedList<String> route = new LinkedList<String>();
-//     route.add("JFK");
+    // this.flights = tickets.size();
+    // LinkedList<String> route = new LinkedList<String>();
+    // route.add("JFK");
 
-//     // Step 3). backtracking
-//     this.backtracking("JFK", route);
-//     return this.result;
+    // // Step 3). backtracking
+    // this.backtracking("JFK", route);
+    // return this.result;
 //   }
 
 //   protected boolean backtracking(String origin, LinkedList<String> route) {
@@ -120,13 +121,13 @@ class Solution {
 //       return true;
 //     }
 
-//     if (!this.flightMap.containsKey(origin))
+//     if (!this.map.containsKey(origin))
 //       return false;
 
 //     int i = 0;
 //     boolean[] bitmap = this.visitBitmap.get(origin);
 
-//     for (String dest : this.flightMap.get(origin)) {
+//     for (String dest : this.map.get(origin)) {
 //       if (!bitmap[i]) {
 //         bitmap[i] = true;
 //         route.add(dest);

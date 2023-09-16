@@ -24,27 +24,31 @@ class Solution {
     //         return dp[i][j];
     //     }
     // }
-    List<Integer> dp[][];
-    List<Integer> helper(String s1,int i,String s2,int j)
+    String dp[][];
+    String helper(String s1,int i,String s2,int j)
     {
-        List<Integer> ans=new ArrayList<>();
+        // List<Integer> ans=new ArrayList<>();
+        String ans="";
         if(i==n || j==m)
         {
             return ans;
         }
         // System.out.println(dp[i][j]);
-        if(!dp[i][j].isEmpty())return dp[i][j];
+        if(dp[i][j]!=null)return dp[i][j];
         if(s1.charAt(i)==s2.charAt(j))
         {
             // System.out.println(i);
-            List<Integer> x=new ArrayList<>();
-            x.add(i);
-            x.addAll(helper(s1,i+1,s2,j+1));
-            return x;
+            // List<Integer> x=new ArrayList<>();
+            // x.add(i);
+            // x.addAll(helper(s1,i+1,s2,j+1));
+            return s1.charAt(i)+helper(s1,i+1,s2,j+1);
         }
-        List<Integer> x1=helper(s1,i,s2,j+1);
-        List<Integer> x2=helper(s1,i+1,s2,j);
-        return dp[i][j]=(x1.size()>x2.size())?x1:x2;
+        // List<Integer> x1=helper(s1,i,s2,j+1);
+        // List<Integer> x2=helper(s1,i+1,s2,j);
+        // return dp[i][j]=(x1.size()>x2.size())?x1:x2;
+        String x1=helper(s1,i,s2,j+1);
+        String x2=helper(s1,i+1,s2,j);
+        return dp[i][j]=(x1.length()>x2.length())?x1:x2;
         // x.add(i);
         // return x;
     }
@@ -53,29 +57,32 @@ class Solution {
         m=str2.length();
         // dp=new String[n][m];
         // return helper(str1,0,str2,0);
-        dp=new List[n][m];
-        for(int i=0;i<n;i++)
-        {
-            for(int j=0;j<m;j++)
-            {
-                dp[i][j]=new ArrayList<>();
-            }
-        }
+        // dp=new List[n][m];
+        // for(int i=0;i<n;i++)
+        // {
+        //     for(int j=0;j<m;j++)
+        //     {
+        //         dp[i][j]=new ArrayList<>();
+        //     }
+        // }
+        dp=new String[n][m];
         // for(int x[]:dp)
         // {
         //     Arrays.fill(x,new ArrayList<>());
         // }
-        List<Integer> subseq=helper(str1,0,str2,0);
+        // List<Integer> subseq=helper(str1,0,str2,0);
+        String subseq=helper(str1,0,str2,0);
         // System.out.println(subseq);
         int i=0,j=0;
         StringBuilder sb=new StringBuilder();
-        for(int x:subseq)
+        for(char x:subseq.toCharArray())
         {
-            int index=str2.indexOf(str1.charAt(x),j);
-            sb.append(str1.substring(i,x));
-            sb.append(str2.substring(j,index+1));//add index too
-            i=x+1;
-            j=index+1;
+            int index1=str1.indexOf(x,i);
+            int index2=str2.indexOf(x,j);
+            sb.append(str1.substring(i,index1));
+            sb.append(str2.substring(j,index2+1));//add index too
+            i=index1+1;
+            j=index2+1;
         }
         if(i!=n)
         {

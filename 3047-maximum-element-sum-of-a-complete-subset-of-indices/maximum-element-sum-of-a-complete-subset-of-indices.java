@@ -3,18 +3,18 @@ class Solution {
         long output=0;
         HashMap<Long,Long> map=new HashMap<>();
         long ind=1;
-        for(int x:nums)
+        for(long x:nums)
         {
             long remain=ind++;
-            for(int i=2;i*i<=remain;i++)
+            for(long i=2;i*i<=remain;i++)
             {
-                while(remain%((long)i*i)==0)
-                    remain/=((long)i*i);
+                while(remain%(i*i)==0)
+                    remain/=(i*i);
             }
             // System.out.println(map);
             // System.out.println(x+" "+remain);
-            map.put((long)remain,map.getOrDefault((long)remain,0l)+(long)x);
-            output=Math.max(output,map.get((long)remain));
+            map.put(remain,map.getOrDefault(remain,0l)+x);
+            output=Math.max(output,map.get(remain));
         }
         return output;
     }

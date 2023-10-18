@@ -15,7 +15,7 @@ class Solution {
             indegree[x[0]]++;
             indegree[x[1]]++;
         }
-        List<Integer> leafs=new ArrayList<>();
+        Queue<Integer> leafs=new LinkedList<>();
         for(int i=0;i<n;i++)
         {
             if(indegree[i]==1)
@@ -29,7 +29,7 @@ class Solution {
             int size=leafs.size();
             while(size-->0)
             {
-                int curr=leafs.remove(size);
+                int curr=leafs.poll();
                 int adjacent=adj[curr].iterator().next();//get one element
                 adj[adjacent].remove(curr);//only one exits
                 indegree[adjacent]--;
@@ -39,6 +39,7 @@ class Solution {
                 }
             }
         }
-        return leafs;
+        // List
+        return (List)leafs;
     }
 }

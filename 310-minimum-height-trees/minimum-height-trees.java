@@ -3,10 +3,10 @@ class Solution {
         if(n==1)
             return Arrays.asList(0);
         int indegree[]=new int[n];
-        List<Integer>  adj[]=new ArrayList[n];
+        HashSet<Integer>  adj[]=new HashSet[n];
         for(int i=0;i<n;i++)
         {
-            adj[i]=new ArrayList<>();
+            adj[i]=new HashSet<>();
         }
         for(int x[]:edges)
         {
@@ -30,8 +30,8 @@ class Solution {
             while(size-->0)
             {
                 int curr=leafs.remove(size);
-                int adjacent=adj[curr].get(0);
-                adj[adjacent].remove(Integer.valueOf(curr));//only one exits
+                int adjacent=adj[curr].iterator().next();//get one element
+                adj[adjacent].remove(curr);//only one exits
                 indegree[adjacent]--;
                 if(indegree[adjacent]==1)
                 {

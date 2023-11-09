@@ -1,31 +1,23 @@
 class Solution {
     private final int mod=(int)1e9+7;
-    // private long counter(long n)
-    // {
-    //     return ((((n*(n+1)%mod))%mod)/2)%mod;
-    // }
+    private long counter(long n)
+    {
+        return (n*(n+1))%mod/2;
+    }
     public int countHomogenous(String s) {
-        // int start=0;
-        long n=s.length();
-        long counter=1;
-        long ans=1;
-        for(int i=1;i<n;i++)
+        long ans=0;
+        int start=0;
+        int n=s.length();
+        for(int i=0;i<n;i++)
         {
-            if(s.charAt(i)==s.charAt(i-1))
+            if(s.charAt(i)!=s.charAt(start))
             {
-                // ans+=counter((long)i-start);
-                counter++;
-                // start=i;
+                ans+=counter((long)i-start);
+                ans=(ans)%mod;
+                start=i;
             }
-            else{
-                counter=1;
-            }
-            ans+=counter;
-            ans=(ans)%mod;
-            // System.out.println(counter+" "+i);
         }
-        // ans+=counter(n-start);
-        // ans+=counter;
+        ans+=counter(n-start);
         return (int)(ans)%mod;
     }
 }

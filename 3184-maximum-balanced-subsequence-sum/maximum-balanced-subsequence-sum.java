@@ -21,14 +21,13 @@ class Solution {
                     temp+=map.get(map.floorKey(arr[i]));
                 }
                 // else{
-                //     map.put(arr[i],temp);
-                // }
+                map.put(arr[i],temp);
                 while(map.higherKey(arr[i])!=null && map.get(map.higherKey(arr[i]))<temp)
                     map.remove(map.higherKey(arr[i]));
-                if(map.floorKey(arr[i])==null || map.floorKey(arr[i])<temp)
-                {
-                    map.put(arr[i],temp);
-                }
+                // if(map.floorKey(arr[i])==null || map.floorKey(arr[i])<temp)
+                // {
+                //     map.put(arr[i],temp);
+                // }
                 ans=Math.max(ans,temp);
             }
         }

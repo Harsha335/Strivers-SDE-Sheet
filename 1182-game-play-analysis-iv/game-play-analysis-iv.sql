@@ -1,0 +1,1 @@
+select round(sum(c.start=date_sub(a.event_date,interval 1 day))/count(distinct a.player_id),2) as fraction from activity a join (select b.player_id,min(b.event_date) as start from Activity b group by b.player_id) c on a.player_id=c.player_id;

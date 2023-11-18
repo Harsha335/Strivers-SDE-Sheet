@@ -1,1 +1,1 @@
-select class from (select if(count(student)>=5,class,null) as class from Courses group by class) as t where class is not null;
+select class from Courses group by class having count(distinct student)>=5;
